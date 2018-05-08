@@ -4,7 +4,6 @@ import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
 import ru.asmi.pojo.Course;
 import ru.asmi.pojo.Lection;
-import ru.asmi.pojo.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

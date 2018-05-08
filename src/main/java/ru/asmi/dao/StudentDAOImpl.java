@@ -2,7 +2,6 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
-import ru.asmi.pojo.Homework;
 import ru.asmi.pojo.Student;
 
 import java.sql.*;

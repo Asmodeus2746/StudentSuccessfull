@@ -3,7 +3,7 @@ plugins {
     id 'war'
 }
 
-group 'ru.asmi'
+group 'ru.ru.asmi'
 version '1.0.0'
 
 sourceCompatibility = 1.8
