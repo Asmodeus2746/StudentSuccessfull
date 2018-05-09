@@ -1,0 +1,139 @@
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
+--
+-- Host: localhost    Database: StudentsSuccessfull
+-- ------------------------------------------------------
+-- Server version	5.7.22-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Courses`
+--
+
+DROP TABLE IF EXISTS `Courses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Courses` (
+  `id` int(11) NOT NULL,
+  `title` text,
+  `annotation` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Courses`
+--
+
+LOCK TABLES `Courses` WRITE;
+/*!40000 ALTER TABLE `Courses` DISABLE KEYS */;
+INSERT INTO `Courses` VALUES (1,'Course1','Annotation1'),(2,'Course2','Annotation2'),(3,'Course3','Annotation3');
+/*!40000 ALTER TABLE `Courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Homeworks`
+--
+
+DROP TABLE IF EXISTS `Homeworks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Homeworks` (
+  `id` int(11) NOT NULL,
+  `homework` text,
+  `mark` int(11) DEFAULT '0',
+  `lectionID` int(11) NOT NULL,
+  `studentID` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lectionID` (`lectionID`),
+  KEY `studentID` (`studentID`),
+  CONSTRAINT `Homeworks_ibfk_1` FOREIGN KEY (`lectionID`) REFERENCES `Lections` (`id`),
+  CONSTRAINT `Homeworks_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `Students` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Homeworks`
+--
+
+LOCK TABLES `Homeworks` WRITE;
+/*!40000 ALTER TABLE `Homeworks` DISABLE KEYS */;
+INSERT INTO `Homeworks` VALUES (1,'hw1',87,2,1),(2,'hw2',89,3,1),(3,'hw3',92,1,1);
+/*!40000 ALTER TABLE `Homeworks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Lections`
+--
+
+DROP TABLE IF EXISTS `Lections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Lections` (
+  `id` int(11) NOT NULL,
+  `title` text,
+  `article` text,
+  `homework` text,
+  `presentation` text,
+  `courseID` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `courseID` (`courseID`),
+  CONSTRAINT `Lections_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `Courses` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Lections`
+--
+
+LOCK TABLES `Lections` WRITE;
+/*!40000 ALTER TABLE `Lections` DISABLE KEYS */;
+INSERT INTO `Lections` VALUES (1,'title1','article1','homework1','present_link1',2),(2,'title2','article2','homework2','present_link2',2),(3,'title3','article3','homework3','present_link3',1);
+/*!40000 ALTER TABLE `Lections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Students`
+--
+
+DROP TABLE IF EXISTS `Students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Students` (
+  `id` int(11) NOT NULL,
+  `name` text,
+  `soname` text,
+  `age` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Students`
+--
+
+LOCK TABLES `Students` WRITE;
+/*!40000 ALTER TABLE `Students` DISABLE KEYS */;
+INSERT INTO `Students` VALUES (1,'Name1','Soname1',18),(2,'Name2','Soname2',19),(3,'Name3','Soname3',21);
+/*!40000 ALTER TABLE `Students` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-05-09 18:32:31
