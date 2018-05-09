@@ -21,4 +21,13 @@
         <servlet-name>student_list</servlet-name>
         <url-pattern>/student_list</url-pattern>
     </servlet-mapping>
+    <display-name>GetCourseList</display-name>
+    <servlet>
+        <servlet-name>course_list</servlet-name>
+        <servlet-class>ru.asmi.servlets.GetCourseListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>course_list</servlet-name>
+        <url-pattern>/course_list</url-pattern>
+    </servlet-mapping>
 </web-app>
