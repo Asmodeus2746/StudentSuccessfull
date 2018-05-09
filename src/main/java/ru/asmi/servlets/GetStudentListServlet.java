@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import ru.asmi.dao.StudentDAO;
 import ru.asmi.dao.StudentDAOImpl;
 import ru.asmi.pojo.Student;
+import ru.asmi.service.StudentService;
+import ru.asmi.service.StudentServiceImpl;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +20,9 @@ public class GetStudentListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        StudentDAO studentDAO = new StudentDAOImpl();
+        StudentService studentService = new StudentServiceImpl();
         try {
-            List<Student> students = studentDAO.getStudents();
+            List<Student> students = studentService.getStudents();
             for(Student student : students) resp.getWriter().println("name: " + student.getName() + " soname: " + student.getSoname() + " age: " + student.getAge());
         } catch (SQLException | NullPointerException e) {
             resp.getWriter().println("Sorry! We have some problems =(");
