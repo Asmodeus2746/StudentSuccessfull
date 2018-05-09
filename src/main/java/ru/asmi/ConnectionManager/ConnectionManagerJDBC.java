@@ -1,5 +1,7 @@
 package ru.asmi.ConnectionManager;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 public class ConnectionManagerJDBC implements ConnectionManager {
 
     private static ConnectionManager connectionManager;
+    private final static Logger logger = Logger.getLogger(ConnectionManagerJDBC.class);
 
     public static ConnectionManager getInstance() {
         if(connectionManager == null)
@@ -24,7 +27,7 @@ public class ConnectionManagerJDBC implements ConnectionManager {
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/StudentsSuccessfull", "root", "0805");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            logger.error("Problem with connection with database");
         }
         return connection;
     }
