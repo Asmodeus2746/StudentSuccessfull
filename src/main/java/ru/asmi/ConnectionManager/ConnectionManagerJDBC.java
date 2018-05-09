@@ -21,13 +21,9 @@ public class ConnectionManagerJDBC implements ConnectionManager {
     public Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/StudentsSuccessfull",
-                        "postgres",
-                        "0805");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+            Class.forName("com.mysql.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/StudentsSuccessfull", "root", "0805");
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return connection;
