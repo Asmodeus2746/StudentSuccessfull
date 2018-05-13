@@ -73,39 +73,31 @@ public class LectionDAOImpl implements LectionDAO {
     }
 
     @Override
-    public boolean addLection(Lection lection) throws SQLException, CourseNotFoundException {
-        boolean ret;
-
+    public void addLection(Lection lection) throws SQLException, CourseNotFoundException {
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Lections (id, title, article, homework, presentation, courseID) VALUES (?, ?, ?, ?, ?, ?)");
-        statement.setInt(1, lection.getId());
-        statement.setString(2, lection.getTitle());
-        statement.setString(3, lection.getArticle());
-        statement.setString(4, lection.getHomework());
-        statement.setString(5, lection.getPresentation());
-        statement.setInt(1, lection.getCourseID());
-        ret = statement.execute();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Lections (title, article, homework, presentation, courseID) VALUES (?, ?, ?, ?, ?)");
+        statement.setString(1, lection.getTitle());
+        statement.setString(2, lection.getArticle());
+        statement.setString(3, lection.getHomework());
+        statement.setString(4, lection.getPresentation());
+        statement.setInt(5, lection.getCourseID());
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean delLection(int id) throws SQLException {
-        boolean ret;
+    public void delLection(int id) throws SQLException {
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Lections WHERE id = ?");
         statement.setInt(1, id);
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean updateLection(Lection lection) throws SQLException, CourseNotFoundException {
-        boolean ret;
-
+    public void updateLection(Lection lection) throws SQLException, CourseNotFoundException {
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();
@@ -116,8 +108,7 @@ public class LectionDAOImpl implements LectionDAO {
         statement.setString(4, lection.getPresentation());
         statement.setInt(5, lection.getCourseID());
         statement.setInt(6, lection.getId());
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 }

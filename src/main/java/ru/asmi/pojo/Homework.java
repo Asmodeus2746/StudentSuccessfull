@@ -17,8 +17,24 @@ public class Homework {
         this.studentID = studentID;
     }
 
+    public Homework(String homework, int mark, int lectionID, int studentID) {
+        this.homework = homework;
+        this.mark = mark;
+        this.lectionID = lectionID;
+        this.studentID = studentID;
+    }
+
     public Homework(int id, String homework, int mark, int lectionID, int studentID, Lection lection, Student student) {
         this.id = id;
+        this.homework = homework;
+        this.mark = mark;
+        this.lectionID = lectionID;
+        this.studentID = studentID;
+        this.lection = lection;
+        this.student = student;
+    }
+
+    public Homework(String homework, int mark, int lectionID, int studentID, Lection lection, Student student) {
         this.homework = homework;
         this.mark = mark;
         this.lectionID = lectionID;

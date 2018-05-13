@@ -58,39 +58,31 @@ public class HomeworkDAOImpl implements HomeworkDAO {
     }
 
     @Override
-    public boolean addHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
-        boolean ret;
-
+    public void addHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 
         Connection connection = connectionManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Homeworks (id, studentID, lectionID, homework, mark) VALUES (?, ?, ?, ?, ?)");
-        statement.setInt(1, homework.getId());
-        statement.setInt(2, homework.getStudentID());
-        statement.setInt(3, homework.getLectionID());
-        statement.setString(4, homework.getHomework());
-        statement.setInt(5, homework.getMark());
-        ret = statement.execute();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Homeworks (studentID, lectionID, homework, mark) VALUES (?, ?, ?, ?)");
+        statement.setInt(1, homework.getStudentID());
+        statement.setInt(2, homework.getLectionID());
+        statement.setString(3, homework.getHomework());
+        statement.setInt(4, homework.getMark());
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean delHomework(int id) throws SQLException {
-        boolean ret;
+    public void delHomework(int id) throws SQLException {
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Homeworks WHERE id = ?");
         statement.setInt(1, id);
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean updateHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
-        boolean ret;
-
+    public void updateHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 
@@ -101,8 +93,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
         statement.setString(3, homework.getHomework());
         statement.setInt(4, homework.getMark());
         statement.setInt(5, homework.getId());
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 }

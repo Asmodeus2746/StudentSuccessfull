@@ -11,6 +11,11 @@ public class Course {
         this.annotation = annotation;
     }
 
+    public Course(String title, String annotation) {
+        this.title = title;
+        this.annotation = annotation;
+    }
+
     public int getId() {
         return id;
     }

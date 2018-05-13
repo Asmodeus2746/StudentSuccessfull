@@ -18,8 +18,25 @@ public class Lection {
         this.courseID = courseID;
     }
 
+    public Lection(String title, String article, String homework, String presentation, int courseID) {
+        this.title = title;
+        this.article = article;
+        this.homework = homework;
+        this.presentation = presentation;
+        this.courseID = courseID;
+    }
+
     public Lection(int id, String title, String article, String homework, String presentation, int courseID, Course course) {
         this.id = id;
+        this.title = title;
+        this.article = article;
+        this.homework = homework;
+        this.presentation = presentation;
+        this.courseID = courseID;
+        this.course = course;
+    }
+
+    public Lection(String title, String article, String homework, String presentation, int courseID, Course course) {
         this.title = title;
         this.article = article;
         this.homework = homework;
