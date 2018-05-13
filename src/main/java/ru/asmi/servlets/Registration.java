@@ -31,12 +31,28 @@ public class Registration extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=SUCCESS");
                 break;
             }
-            case UserService.INVALID_DATA: {
-                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_DATA");
-                break;
-            }
             case UserService.ALREADY_USED: {
                 resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=ALREADY_USED");
+                break;
+            }
+            case UserService.INVALID_EMAIL: {
+                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_EMAIL");
+                break;
+            }
+            case UserService.INVALID_PASSWORD: {
+                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_PASSWORD");
+                break;
+            }
+            case UserService.INVALID_NAME: {
+                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_NAME");
+                break;
+            }
+            case UserService.INVALID_SONAME: {
+                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_SONAME");
+                break;
+            }
+            case UserService.INVALID_AGE: {
+                resp.sendRedirect(req.getContextPath() + "/registration.jsp?ret=INVALID_AGE");
                 break;
             }
         }

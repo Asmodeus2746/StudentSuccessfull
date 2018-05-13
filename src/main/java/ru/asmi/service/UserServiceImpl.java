@@ -18,9 +18,11 @@ public class UserServiceImpl implements UserService {
 
         Student student;
 
-        if(email == null || password == null || name == null || soname == null || age < 1 || age > 120) {
-            return INVALID_DATA;
-        }
+        if(email == null) return INVALID_EMAIL;
+        if(password == null) return INVALID_PASSWORD;
+        if(name == null) return INVALID_NAME;
+        if(soname == null) return INVALID_SONAME;
+        if(age < 1 || age > 120) return INVALID_AGE;
 
         try {
             student = studentDAO.getStudentByEmail(email);
