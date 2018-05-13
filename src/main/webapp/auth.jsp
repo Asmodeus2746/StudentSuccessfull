@@ -13,6 +13,13 @@
 <%@ include file="header.jsp" %>
 
 <c:if test="${sessionScope.id == null}">
+    <%
+        String error = "";
+        if(request.getParameter("ret") != null) {
+            if (request.getParameter("ret").equals("FAILED")) error = "Ошибка аутентификации";
+        }
+    %>
+    <p><%=error%></p>
     <form action="${pageContext.request.contextPath}/auth" method="post">
         <label>email: <input type="text" name="email"></label><BR>
         <label>Пароль: <input type="password" name="password"></label><BR>

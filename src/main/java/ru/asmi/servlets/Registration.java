@@ -1,5 +1,6 @@
 package ru.asmi.servlets;
 
+import org.apache.log4j.Logger;
 import ru.asmi.service.UserService;
 import ru.asmi.service.UserServiceImpl;
 
@@ -19,7 +20,13 @@ public class Registration extends HttpServlet {
         String soname = req.getParameter("soname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        int age = Integer.parseInt(req.getParameter("age"));
+        int age;
+        try {
+            age =  Integer.parseInt(req.getParameter("age"));
+        } catch (NumberFormatException e) {
+            age = 0;
+        }
+
 
         int regRet = userService.registration(email, password, name, soname, age);
         switch (regRet) {

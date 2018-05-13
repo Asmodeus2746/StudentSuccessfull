@@ -13,6 +13,19 @@
 <%@ include file="header.jsp" %>
 
 <c:if test="${sessionScope.id == null}">
+    <%
+        String error = "";
+        if(request.getParameter("ret") != null) {
+            if (request.getParameter("ret").equals("FAILED")) error = "Ошибка регистрации";
+            else if (request.getParameter("ret").equals("ALREADY_USED")) error = "Почта уже занята";
+            else if (request.getParameter("ret").equals("INVALID_EMAIL")) error = "Невалидная почта";
+            else if (request.getParameter("ret").equals("INVALID_PASSWORD")) error = "Невалидный пароль";
+            else if (request.getParameter("ret").equals("INVALID_NAME")) error = "Невалидное имя";
+            else if (request.getParameter("ret").equals("INVALID_SONAME")) error = "Невалидная фамилия";
+            else if (request.getParameter("ret").equals("INVALID_AGE")) error = "Невалидный возраст";
+        }
+    %>
+    <p><%=error%></p>
     <form action="${pageContext.request.contextPath}/registration" method="post">
         <label>Имя: <input type="text" name="name"></label><BR>
         <label>Фамилия: <input type="text" name="soname"></label><BR>
