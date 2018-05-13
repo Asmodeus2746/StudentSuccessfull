@@ -11,4 +11,20 @@
         <servlet-name>registration</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>auth</servlet-name>
+        <servlet-class>ru.asmi.servlets.Auth</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auth</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>leave_session</servlet-name>
+        <servlet-class>ru.asmi.servlets.LeaveSession</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>leave_session</servlet-name>
+        <url-pattern>/leave_session</url-pattern>
+    </servlet-mapping>
 </web-app>

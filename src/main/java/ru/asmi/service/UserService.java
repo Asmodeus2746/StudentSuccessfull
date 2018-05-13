@@ -1,5 +1,7 @@
 package ru.asmi.service;
 
+import ru.asmi.pojo.Student;
+
 public interface UserService {
 
     int FAILED = -1;
@@ -12,4 +14,5 @@ public interface UserService {
     int INVALID_AGE = 6;
 
     int registration(String email, String password, String name, String soname, int age);
+    Student auth(String email, String password);
 }

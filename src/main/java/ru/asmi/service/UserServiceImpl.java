@@ -45,4 +45,20 @@ public class UserServiceImpl implements UserService {
             return ALREADY_USED;
         }
     }
+
+    @Override
+    public Student auth(String email, String password) {
+
+        Student student;
+
+        if(email == null || password == null) return null;
+
+        try {
+            student = studentDAO.getStudentByEmail(email);
+            return student;
+        } catch (SQLException e) {
+            logger.error(e.toString() + " was catch");
+            return null;
+        }
+    }
 }

@@ -22,8 +22,14 @@
 
     <header class="header">
         <h1 class="headline"><%=title%></h1>
+        В светлом будущем здесь будут ссылки, логин и прочее.
         <div class="logout">
-            В светлом будущем здесь будут ссылки, логин и прочее.
+            <c:if test="${sessionScope.id > 0}">
+                <a href="/leave_session">Выйти</a>
+            </c:if>
+            <c:if test="${sessionScope.id == null}">
+                <a href="auth.jsp">Войти</a> | <a href="registration.jsp">Регистрация</a>
+            </c:if>
         </div>
     </header>
 
