@@ -3,6 +3,7 @@ package ru.asmi.dao;
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
 import ru.asmi.Exceptions.CourseNotFoundException;
+import ru.asmi.Exceptions.InputDataNotFoundException;
 import ru.asmi.Exceptions.LectionNotFoundException;
 import ru.asmi.Exceptions.StudentNotFoundException;
 import ru.asmi.pojo.Course;
@@ -21,10 +22,11 @@ public class HomeworkDAOImpl implements HomeworkDAO {
 
     @Override
     public ArrayList<Homework> getHomeworkList(Student student, Course course) throws SQLException {
-        ArrayList<Homework> homeworks = new ArrayList<>();
-
+        if(course == null || student == null) throw new InputDataNotFoundException();
         if((new CourseDAOImpl()).getCourseById(course.getId()) == null) throw new CourseNotFoundException();
         if((new StudentDAOImpl()).getStudentById(student.getId()) == null) throw new StudentNotFoundException();
+
+        ArrayList<Homework> homeworks = new ArrayList<>();
 
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Homework WHERE studentId = ? AND lectionID IN (SELECT lectionID FROM courses WHERE id = ? )");
@@ -62,6 +64,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
 
     @Override
     public void addHomework(Homework homework) throws SQLException {
+        if(homework == null) throw new InputDataNotFoundException();
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 
@@ -86,6 +89,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
 
     @Override
     public void updateHomework(Homework homework) throws SQLException {
+        if(homework == null) throw new InputDataNotFoundException();
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 

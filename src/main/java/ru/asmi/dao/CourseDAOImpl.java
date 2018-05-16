@@ -2,6 +2,7 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
+import ru.asmi.Exceptions.InputDataNotFoundException;
 import ru.asmi.pojo.Course;
 
 import java.sql.*;
@@ -44,6 +45,8 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public void addCourse(Course course) throws SQLException {
+        if(course == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO Courses (title, annotation) VALUES (?, ?)");
         statement.setString(1, course.getTitle());
@@ -63,6 +66,8 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public void delCourse(String title) throws SQLException {
+        if(title == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Courses WHERE name = ?");
         statement.setString(1, title);
@@ -72,6 +77,8 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public void updateCourse(Course course) throws SQLException {
+        if(course == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("UPDATE Courses SET title = ?, annotation = ? WHERE id = ? ");
         statement.setString(1, course.getTitle());

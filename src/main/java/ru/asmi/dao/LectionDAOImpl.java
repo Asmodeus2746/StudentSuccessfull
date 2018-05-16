@@ -3,6 +3,7 @@ package ru.asmi.dao;
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
 import ru.asmi.Exceptions.CourseNotFoundException;
+import ru.asmi.Exceptions.InputDataNotFoundException;
 import ru.asmi.pojo.Course;
 import ru.asmi.pojo.Lection;
 
@@ -18,6 +19,8 @@ public class LectionDAOImpl implements LectionDAO {
 
     @Override
     public ArrayList<Lection> getLectionByCourse(Course course) throws SQLException {
+        if(course == null) throw new InputDataNotFoundException();
+
         ArrayList<Lection> lections = new ArrayList<>();
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Lections WHERE courseID = ?");
@@ -37,6 +40,8 @@ public class LectionDAOImpl implements LectionDAO {
 
     @Override
     public ArrayList<Lection> getLectionByCourse(String courseName) throws SQLException {
+        if(courseName == null) throw new InputDataNotFoundException();
+
         ArrayList<Lection> lections = new ArrayList<>();
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Lections WHERE courseID IN (SELECT id FROM courses WHERE name = ?)");
@@ -75,6 +80,7 @@ public class LectionDAOImpl implements LectionDAO {
 
     @Override
     public void addLection(Lection lection) throws SQLException {
+        if(lection == null) throw new InputDataNotFoundException();
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();
@@ -99,6 +105,7 @@ public class LectionDAOImpl implements LectionDAO {
 
     @Override
     public void updateLection(Lection lection) throws SQLException {
+        if(lection == null) throw new InputDataNotFoundException();
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();

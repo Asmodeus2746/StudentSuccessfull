@@ -2,6 +2,7 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
+import ru.asmi.Exceptions.InputDataNotFoundException;
 import ru.asmi.pojo.Student;
 
 import java.sql.*;
@@ -52,6 +53,8 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student getStudentByEmail(String email) throws SQLException {
+        if(email == null) throw new InputDataNotFoundException();
+
         Student student = null;
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Students WHERE email = ?");
@@ -72,6 +75,8 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public void addStudent(Student student) throws SQLException {
+        if(student == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO Students (name, soname, age, email, password, seqLevel) VALUES (?, ?, ?, ?, ?, ?)");
         statement.setString(1, student.getName());
@@ -95,6 +100,8 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public void delStudent(String name) throws SQLException {
+        if(name == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Students WHERE name = ?");
         statement.setString(1, name);
@@ -104,6 +111,8 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public void updateStudent(Student student) throws SQLException {
+        if(student == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("UPDATE Students SET name = ?, soname = ?, age = ?, email = ?, password = ?, seqLevel = ? WHERE id = ? ");
         statement.setString(1, student.getName());
