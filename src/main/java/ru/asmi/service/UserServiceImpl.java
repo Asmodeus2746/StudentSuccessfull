@@ -1,6 +1,7 @@
 package ru.asmi.service;
 
 import org.apache.log4j.Logger;
+import ru.asmi.Enumerations.RegistationRet;
 import ru.asmi.dao.StudentDAO;
 import ru.asmi.dao.StudentDAOImpl;
 import ru.asmi.pojo.Student;
@@ -14,35 +15,35 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public int registration(String email, String password, String name, String soname, int age) {
+    public RegistationRet registration(String email, String password, String name, String soname, int age) {
 
         Student student;
 
-        if(email == null) return INVALID_EMAIL;
-        if(password == null) return INVALID_PASSWORD;
-        if(name == null) return INVALID_NAME;
-        if(soname == null) return INVALID_SONAME;
-        if(age < 1 || age > 120) return INVALID_AGE;
+        if(email == null) return RegistationRet.INVALID_EMAIL;
+        if(password == null) return RegistationRet.INVALID_PASSWORD;
+        if(name == null) return RegistationRet.INVALID_NAME;
+        if(soname == null) return RegistationRet.INVALID_SONAME;
+        if(age < 1 || age > 120) return RegistationRet.INVALID_AGE;
 
         try {
             student = studentDAO.getStudentByEmail(email);
         } catch (SQLException e) {
             logger.error(e.toString() + " was catch");
-            return FAILED;
+            return RegistationRet.FAILED;
         }
 
         if(student == null) {
             student = new Student(name, soname, age, email, password, 0);
             try {
                 studentDAO.addStudent(student);
-                return SUCCESS;
+                return RegistationRet.SUCCESS;
             } catch (SQLException e) {
                 logger.error(e.toString() + " was catch");
-                return FAILED;
+                return RegistationRet.FAILED;
             }
         }
         else {
-            return ALREADY_USED;
+            return RegistationRet.ALREADY_USED;
         }
     }
 

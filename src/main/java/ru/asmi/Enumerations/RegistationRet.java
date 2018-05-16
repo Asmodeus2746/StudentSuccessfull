@@ -1,0 +1,5 @@
+package ru.asmi.Enumerations;
+
+public enum RegistationRet {
+    FAILED, SUCCESS, ALREADY_USED, INVALID_EMAIL, INVALID_PASSWORD, INVALID_NAME, INVALID_SONAME, INVALID_AGE;
+}
