@@ -2,6 +2,7 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
+import ru.asmi.Exceptions.CourseNotFoundException;
 import ru.asmi.pojo.Course;
 import ru.asmi.pojo.Lection;
 
@@ -73,7 +74,7 @@ public class LectionDAOImpl implements LectionDAO {
     }
 
     @Override
-    public void addLection(Lection lection) throws SQLException, CourseNotFoundException {
+    public void addLection(Lection lection) throws SQLException {
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();
@@ -97,7 +98,7 @@ public class LectionDAOImpl implements LectionDAO {
     }
 
     @Override
-    public void updateLection(Lection lection) throws SQLException, CourseNotFoundException {
+    public void updateLection(Lection lection) throws SQLException {
         if((new CourseDAOImpl()).getCourseById(lection.getCourseID()) == null) throw new CourseNotFoundException();
 
         Connection connection = connectionManager.getConnection();

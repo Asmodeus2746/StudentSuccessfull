@@ -2,6 +2,9 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
+import ru.asmi.Exceptions.CourseNotFoundException;
+import ru.asmi.Exceptions.LectionNotFoundException;
+import ru.asmi.Exceptions.StudentNotFoundException;
 import ru.asmi.pojo.Course;
 import ru.asmi.pojo.Homework;
 import ru.asmi.pojo.Student;
@@ -17,7 +20,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
     private static ConnectionManager connectionManager = ConnectionManagerJDBC.getInstance();
 
     @Override
-    public ArrayList<Homework> getHomeworkList(Student student, Course course) throws SQLException, StudentNotFoundException, CourseNotFoundException {
+    public ArrayList<Homework> getHomeworkList(Student student, Course course) throws SQLException {
         ArrayList<Homework> homeworks = new ArrayList<>();
 
         if((new CourseDAOImpl()).getCourseById(course.getId()) == null) throw new CourseNotFoundException();
@@ -58,7 +61,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
     }
 
     @Override
-    public void addHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
+    public void addHomework(Homework homework) throws SQLException {
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 
@@ -82,7 +85,7 @@ public class HomeworkDAOImpl implements HomeworkDAO {
     }
 
     @Override
-    public void updateHomework(Homework homework) throws SQLException, LectionNotFoundException, StudentNotFoundException {
+    public void updateHomework(Homework homework) throws SQLException {
         if((new LectionDAOImpl()).getLectionById(homework.getLectionID()) == null) throw new LectionNotFoundException();
         if((new StudentDAOImpl()).getStudentById(homework.getStudentID()) == null) throw new StudentNotFoundException();
 
