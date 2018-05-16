@@ -13,11 +13,13 @@ public class UserServiceImpl implements UserService {
     private final static Logger logger = Logger.getLogger(UserServiceImpl.class);
     private static StudentDAO studentDAO = new StudentDAOImpl();
 
+    private boolean checkStudentExist(String email) throws SQLException {
+        return studentDAO.getStudentByEmail(email) == null;
+    }
+
 
     @Override
     public RegistationRet registration(String email, String password, String name, String soname, int age) {
-
-        Student student;
 
         if(email == null) return RegistationRet.INVALID_EMAIL;
         if(password == null) return RegistationRet.INVALID_PASSWORD;
@@ -25,25 +27,15 @@ public class UserServiceImpl implements UserService {
         if(soname == null) return RegistationRet.INVALID_SONAME;
         if(age < 1 || age > 120) return RegistationRet.INVALID_AGE;
 
+
+        Student student = new Student(name, soname, age, email, password, 0);
         try {
-            student = studentDAO.getStudentByEmail(email);
+            if(!checkStudentExist(email)) return RegistationRet.ALREADY_USED;
+            studentDAO.addStudent(student);
+            return RegistationRet.SUCCESS;
         } catch (SQLException e) {
             logger.error(e.toString() + " was catch");
             return RegistationRet.FAILED;
-        }
-
-        if(student == null) {
-            student = new Student(name, soname, age, email, password, 0);
-            try {
-                studentDAO.addStudent(student);
-                return RegistationRet.SUCCESS;
-            } catch (SQLException e) {
-                logger.error(e.toString() + " was catch");
-                return RegistationRet.FAILED;
-            }
-        }
-        else {
-            return RegistationRet.ALREADY_USED;
         }
     }
 
