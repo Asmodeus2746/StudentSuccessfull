@@ -13,4 +13,5 @@ public interface StudentDAO {
     void delStudent(int id) throws SQLException;
     void delStudent(String name) throws SQLException;
     void updateStudent(Student student) throws SQLException;
+    void updateStudentByEmail(Student student) throws SQLException;
 }

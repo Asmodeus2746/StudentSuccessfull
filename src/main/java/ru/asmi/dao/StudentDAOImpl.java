@@ -125,4 +125,21 @@ public class StudentDAOImpl implements StudentDAO {
         statement.execute();
         connection.close();
     }
+
+    @Override
+    public void updateStudentByEmail(Student student) throws SQLException {
+        if(student == null) throw new InputDataNotFoundException();
+
+        Connection connection = connectionManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE Students SET name = ?, soname = ?, age = ?, email = ?, password = ?, seqLevel = ? WHERE email = ? ");
+        statement.setString(1, student.getName());
+        statement.setString(2, student.getSoname());
+        statement.setInt(3, student.getAge());
+        statement.setString(4, student.getEmail());
+        statement.setString(5, student.getPassword());
+        statement.setInt(6, student.getSeqLevel());
+        statement.setString(7, student.getEmail());
+        statement.execute();
+        connection.close();
+    }
 }

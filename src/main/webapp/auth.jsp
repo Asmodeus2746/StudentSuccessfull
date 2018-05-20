@@ -27,7 +27,7 @@
     </form>
 </c:if>
 <c:if test="${sessionScope.id > 0}">
-    <p>Уважаемый <c:out value="sessionScope.name"></c:out>! Вы уже в системе.</p>
+    <p>Уважаемый <c:out value="${sessionScope.name}"></c:out>! Вы уже в системе.</p>
     <br>
     <a href="index.jsp">На главную</a>
 </c:if>

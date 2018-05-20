@@ -27,4 +27,20 @@
         <servlet-name>leave_session</servlet-name>
         <url-pattern>/leave_session</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>ru.asmi.servlets.Profile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>update_profile</servlet-name>
+        <servlet-class>ru.asmi.servlets.UpdateProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>update_profile</servlet-name>
+        <url-pattern>/update_profile</url-pattern>
+    </servlet-mapping>
 </web-app>
