@@ -21,7 +21,7 @@
     %>
     <p><%=error%></p>
     <form action="${pageContext.request.contextPath}/auth" method="post">
-        <label>email: <input type="text" name="email"></label><BR>
+        <label>email: <input type="email" name="email"></label><BR>
         <label>Пароль: <input type="password" name="password"></label><BR>
         <input type="submit" value="OK">
     </form>

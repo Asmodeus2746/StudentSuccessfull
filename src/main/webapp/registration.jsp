@@ -29,7 +29,7 @@
     <form action="${pageContext.request.contextPath}/registration" method="post">
         <label>Имя: <input type="text" name="name"></label><BR>
         <label>Фамилия: <input type="text" name="soname"></label><BR>
-        <label>email: <input type="text" name="email"></label><BR>
+        <label>email: <input type="email" name="email"></label><BR>
         <label>Пароль: <input type="password" name="password"></label><BR>
         <label>Возраст: <input type="text" name="age"></label><BR>
         <input type="submit" value="OK">

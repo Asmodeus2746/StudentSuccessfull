@@ -39,7 +39,7 @@
         <form action="${pageContext.request.contextPath}/update_profile" method="post">
             <label>Имя: <input type="text" name="name" value="<c:out value="${sessionScope.name}"></c:out>"></label><BR>
             <label>Фамилия: <input type="text" name="soname" value="<c:out value="${sessionScope.soname}"></c:out>"></label><BR>
-            <label>email: <input type="text" name="email" value="<c:out value="${sessionScope.email}"></c:out>"></label><BR>
+            <label>email: <input type="email" name="email" value="<c:out value="${sessionScope.email}"></c:out>"></label><BR>
             <label>Возраст: <input type="text" name="age" value="<c:out value="${sessionScope.age}"></c:out>"></label><BR>
             <label>Подтвердите пароль: <input type="password" name="password"></label><BR>
             <input type="submit" value="Oбновить">
