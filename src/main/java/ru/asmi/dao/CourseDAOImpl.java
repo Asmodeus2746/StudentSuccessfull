@@ -2,6 +2,7 @@ package ru.asmi.dao;
 
 import ru.asmi.ConnectionManager.ConnectionManager;
 import ru.asmi.ConnectionManager.ConnectionManagerJDBC;
+import ru.asmi.Exceptions.InputDataNotFoundException;
 import ru.asmi.pojo.Course;
 
 import java.sql.*;
@@ -43,50 +44,47 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public boolean addCourse(Course course) throws SQLException {
-        boolean ret;
+    public void addCourse(Course course) throws SQLException {
+        if(course == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Courses (id, title, annotation) VALUES (?, ?, ?)");
-        statement.setInt(1, course.getId());
-        statement.setString(2, course.getTitle());
-        statement.setString(3, course.getAnnotation());
-        ret = statement.execute();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Courses (title, annotation) VALUES (?, ?)");
+        statement.setString(1, course.getTitle());
+        statement.setString(2, course.getAnnotation());
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean delCourse(int id) throws SQLException {
-        boolean ret;
+    public void delCourse(int id) throws SQLException {
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Courses WHERE id = ?");
         statement.setInt(1, id);
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean delCourse(String title) throws SQLException {
-        boolean ret;
+    public void delCourse(String title) throws SQLException {
+        if(title == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("DELETE FROM Courses WHERE name = ?");
         statement.setString(1, title);
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 
     @Override
-    public boolean updateCourse(Course course) throws SQLException {
-        boolean ret;
+    public void updateCourse(Course course) throws SQLException {
+        if(course == null) throw new InputDataNotFoundException();
+
         Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("UPDATE Courses SET title = ?, annotation = ? WHERE id = ? ");
         statement.setString(1, course.getTitle());
         statement.setString(2, course.getAnnotation());
         statement.setInt(3, course.getId());
-        ret = statement.execute();
+        statement.execute();
         connection.close();
-        return ret;
     }
 }

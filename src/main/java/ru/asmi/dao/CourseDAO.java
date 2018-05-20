@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public interface CourseDAO {
     ArrayList<Course> getCourses() throws SQLException;
     Course getCourseById(int id) throws SQLException;
-    boolean addCourse(Course course) throws SQLException;
-    boolean delCourse(int id) throws SQLException;
-    boolean delCourse(String title) throws SQLException;
-    boolean updateCourse(Course course) throws SQLException;
+    void addCourse(Course course) throws SQLException;
+    void delCourse(int id) throws SQLException;
+    void delCourse(String title) throws SQLException;
+    void updateCourse(Course course) throws SQLException;
 }
